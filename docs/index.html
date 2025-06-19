@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fichier avec toute les commandes</title>
+    <link rel="stylesheet" href="css/styles.css" type="text/css" />
+</head>
+<body>
+ <button id="scrollToTop" title="Retour en haut">↑</button>
+<h1>Fichier avec toutes les commandes utilisés<br>SAé Réseaux - BUT Informatique <br> 1ère année - 2024/2025</h1>
+<h3> <u>Auteur :</u> <br> BONNIER Gabin - CIUFFA Enzo - JUSTIN Thomas - SOW Jordan</h3>
+
+<div class="TBDM">
+    <h1>Table des Matières<br>SAE Réseaux - BUT Informatique<br>1ère année - 2024/2025</h1>
+</div>
+
+<ul class="sommaire">
+    <li class="etape-principale"><a href="#etape1">Étape 1 : Installation et Configuration de Base</a></li>
+    <li class="sous-etape"><a href="#etape1-1">1.1 Premiers pas après installation Debian</a></li>
+    <li class="sous-etape"><a href="#etape1-2">1.2 Installation Guest Additions VirtualBox</a></li>
+    <li class="sous-etape"><a href="#etape1-3">1.3 Configuration réseau - IP fixe</a></li>
+    <li class="sous-sous-etape"><a href="#methode1">• Méthode 1 : systemd-networkd</a></li>
+    <li class="sous-sous-etape"><a href="#methode2">• Méthode 2 : /etc/network/interfaces</a></li>
+    <li class="sous-etape"><a href="#etape1-4">1.4 Configuration du nom de machine</a></li>
+    <li class="sous-etape"><a href="#etape1-5">1.5 Tests de connectivité</a></li>
+
+    <li class="etape-principale"><a href="#etape2">Étape 2 : Installation et Configuration Nginx</a></li>
+    <li class="sous-etape"><a href="#etape2-1">2.1 Installation Nginx</a></li>
+    <li class="sous-etape"><a href="#etape2-2">2.2 Configuration des permissions</a></li>
+    <li class="sous-etape"><a href="#etape2-3">2.3 Configuration UTF-8</a></li>
+
+    <li class="etape-principale"><a href="#etape3">Étape 3 : Installation et Configuration PHP</a></li>
+    <li class="sous-etape"><a href="#etape3-1">3.1 Installation PHP</a></li>
+    <li class="sous-etape"><a href="#etape3-2">3.2 Configuration Nginx pour PHP</a></li>
+    <li class="sous-etape"><a href="#etape3-3">3.3 Configuration PHP pour développement</a></li>
+    <li class="sous-etape"><a href="#etape3-4">3.4 Tests PHP</a></li>
+
+    <li class="etape-principale"><a href="#etape4">Étape 4 : Installation des Bases de Données</a></li>
+    <li class="sous-etape"><a href="#etape4-1">4.1 Installation MySQL</a></li>
+    <li class="sous-etape"><a href="#etape4-2">4.2 Installation PostgreSQL</a></li>
+    <li class="sous-etape"><a href="#etape4-3">4.3 Installation PhpMyAdmin</a></li>
+    <li class="sous-etape"><a href="#etape4-4">4.4 Import de la base de test</a></li>
+
+    <li class="etape-principale"><a href="#etape5">Étape 5 : Outils de Développement</a></li>
+    <li class="sous-etape"><a href="#etape5-1">5.1 Installation Visual Studio Code</a></li>
+    <li class="sous-etape"><a href="#etape5-2">5.2 Installation Git</a></li>
+
+    <li class="etape-principale"><a href="#etape6">Étape 6 : Configuration PDO</a></li>
+    <li class="sous-etape"><a href="#etape6-1">6.1 Vérification et activation PDO</a></li>
+    <li class="sous-etape"><a href="#etape6-2">6.2 Test PDO</a></li>
+
+    <li class="etape-principale"><a href="#etape7">Étape 7 : Configuration HTTPS</a></li>
+    <li class="sous-etape"><a href="#etape7-1">7.1 Génération des certificats SSL</a></li>
+    <li class="sous-etape"><a href="#etape7-2">7.2 Configuration SSL dans Nginx</a></li>
+
+    <li class="etape-principale"><a href="#etape8">Étape 8 : Accès Distant</a></li>
+    <li class="sous-etape"><a href="#etape8-1">8.1 Configuration SSH</a></li>
+    <li class="sous-etape"><a href="#etape8-2">8.2 Test de connexion SSH</a></li>
+
+    <li class="etape-principale"><a href="#etape9">Étape 9 : Passage en Production</a></li>
+    <li class="sous-etape"><a href="#etape9-1">9.1 Sécurisation PHP</a></li>
+    <li class="sous-etape"><a href="#etape9-2">9.2 Sécurisation des bases de données</a></li>
+    <li class="sous-etape"><a href="#etape9-3">9.3 Configuration du pare-feu</a></li>
+
+    <li class="etape-principale"><a href="#diagnostic">Commandes de Diagnostic et Maintenance</a></li>
+    <li class="sous-etape"><a href="#verifications">• Vérifications système</a></li>
+    <li class="sous-etape"><a href="#logs">• Consultation des logs</a></li>
+    <li class="sous-etape"><a href="#tests">• Tests de connectivité</a></li>
+    <li class="sous-etape"><a href="#sauvegarde">• Sauvegarde</a></li>
+
+    <li class="etape-principale"><a href="#config-finale">Informations de Configuration Finale</a></li>
+</ul>
+
+
+<div class="info-box">
+    <strong>Informations importantes :</strong><br>
+    • Utilisateur Debian : <code>developer</code> / Mot de passe : <code>123456</code><br>
+    • Utilisateur Windows : <code>Mot de passe : sae123</code><br>
+    • IP serveur : <code>172.16.1.230/24</code><br>
+    • Nom de machine : <code>www.justin-bonnier-sow-ciuffa.net</code><br>
+</div>
+
+<h2 id="etape1">Étape 1 : Installation et Configuration de Base</h2>
+
+<h3 id="etape1-1">1.1 Premiers pas après installation Debian</h3>
+<pre><span class="command"># Vérifier l'utilisateur actuel</span>
+whoami
+
+<span class="command"># Mise à jour du système (en tant que root)</span>
+su -
+apt update
+apt upgrade -y
+apt install curl wget nano vim net-tools htop -y
+exit
+
+<span class="command"># Ou avec sudo</span>
+sudo apt update
+sudo apt upgrade -y
+sudo apt install curl wget nano vim net-tools htop -y</pre>
+
+<h3 id="etape1-2">1.2 Installation Guest Additions VirtualBox</h3>
+<pre><span class="command"># Installer les dépendances</span>
+sudo apt install build-essential dkms linux-headers-$(uname -r) -y
+
+<span class="command"># Vérifier les headers</span>
+ls /usr/src/linux-headers-$(uname -r)
+
+<span class="command"># Monter le CD des Guest Additions</span>
+sudo mkdir /mnt/cdrom
+sudo mount /dev/cdrom /mnt/cdrom
+
+<span class="command"># Installer les Guest Additions</span>
+cd /mnt/cdrom
+sudo ./VBoxLinuxAdditions.run
+
+<span class="command"># En cas d'erreur</span>
+sudo ./VBoxLinuxAdditions.run --nox11
+
+<span class="command"># Redémarrer</span>
+sudo reboot</pre>
+
+<h3 id="etape1-3">1.3 Configuration réseau - IP fixe</h3>
+
+<h4 id="methode1">Méthode 1 : systemd-networkd</h4>
+<pre><span class="command"># Identifier l'interface réseau</span>
+ip link show
+ifconfig -a
+
+<span class="command"># Créer le fichier de configuration</span>
+sudo nano /etc/systemd/network/20-wired.network</pre>
+
+<div class="warning-box">
+<strong>Contenu du fichier /etc/systemd/network/20-wired.network :</strong>
+<pre>[Match]
+Name=enp0s3
+
+[Network]
+Address=172.16.1.230/24
+Gateway=172.16.1.1
+DNS=8.8.8.8
+DNS=8.8.4.4</pre>
+</div>
+
+<pre><span class="command"># Activer systemd-networkd</span>
+sudo systemctl disable networking
+sudo systemctl enable systemd-networkd
+sudo systemctl start systemd-networkd
+sudo reboot</pre>
+
+<h4 id="methode2">Méthode 2 : /etc/network/interfaces</h4>
+<pre><span class="command"># Éditer le fichier interfaces</span>
+sudo nano /etc/network/interfaces</pre>
+
+<div class="warning-box">
+<strong>Ajouter dans /etc/network/interfaces :</strong>
+<pre>auto enp0s3
+iface enp0s3 inet static
+    address 172.16.1.230
+    netmask 255.255.255.0
+    gateway 172.16.1.1
+    dns-nameservers 8.8.8.8 8.8.4.4</pre>
+</div>
+
+<pre><span class="command"># Redémarrer le réseau</span>
+sudo systemctl restart networking</pre>
+
+<h3 id="etape1-4">1.4 Configuration du nom de machine</h3>
+<pre><span class="command"># Définir le hostname</span>
+sudo hostnamectl set-hostname www.nom1-nom2.net
+
+<span class="command"># Vérifier</span>
+hostnamectl
+hostname
+
+<span class="command"># Modifier /etc/hosts</span>
+sudo nano /etc/hosts</pre>
+
+<div class="warning-box">
+<strong>Contenu du fichier /etc/hosts :</strong>
+<pre>127.0.0.1       localhost
+127.0.1.1       www.nom1-nom2.net
+172.16.1.230    www.nom1-nom2.net</pre>
+</div>
+
+<h3 id="etape1-5">1.5 Tests de connectivité</h3>
+<pre><span class="command"># Vérifier l'IP</span>
+ip addr show enp0s3
+
+<span class="command"># Tests réseau</span>
+ping -c 4 172.16.1.1    # Gateway
+ping -c 4 8.8.8.8       # DNS externe
+ping -c 4 google.fr     # Résolution DNS
+
+<span class="command"># Vérifier les services</span>
+sudo systemctl status systemd-networkd
+sudo systemctl status ssh</pre>
+
+<div class="page-break"></div>
+
+<h2 id="etape2">Étape 2 : Installation et Configuration Nginx</h2>
+
+<h3 id="etape2-1">2.1 Installation Nginx</h3>
+<pre><span class="command"># Vérifier si installé</span>
+nginx -v
+
+<span class="command"># Installer Nginx</span>
+sudo apt install nginx -y
+
+<span class="command"># Démarrer et activer</span>
+sudo systemctl start nginx
+sudo systemctl enable nginx
+
+<span class="command"># Vérifier le statut</span>
+sudo systemctl status nginx</pre>
+
+<h3 id="etape2-2">2.2 Configuration des permissions</h3>
+<pre><span class="command"># Ajouter developer au groupe www-data</span>
+sudo usermod -a -G www-data developer
+
+<span class="command"># Modifier les permissions</span>
+sudo chown -R www-data:www-data /var/www/html
+sudo chmod -R 755 /var/www/html
+
+<span class="command"># Créer une page de test</span>
+echo "&lt;h1&gt;Test HTML&lt;/h1&gt;" | sudo tee /var/www/html/essai.html</pre>
+
+<h3 id="etape2-3">2.3 Configuration UTF-8</h3>
+<pre><span class="command"># Éditer la configuration Nginx</span>
+sudo nano /etc/nginx/sites-available/default</pre>
+
+<div class="warning-box">
+<strong>Ajouter dans le bloc server :</strong>
+<pre>charset utf-8;</pre>
+</div>
+
+<pre><span class="command"># Redémarrer Nginx</span>
+sudo systemctl restart nginx</pre>
+
+<h2 id="etape3">Étape 3 : Installation et Configuration PHP</h2>
+
+<h3 id="etape3-1">3.1 Installation PHP</h3>
+<pre><span class="command"># Installer PHP et modules</span>
+sudo apt install php php-fpm php-mysql php-pgsql php-cli php-curl php-gd php-mbstring -y
+
+<span class="command"># Vérifier la version</span>
+php --version</pre>
+
+<h3 id="etape3-2">3.2 Configuration Nginx pour PHP</h3>
+<pre><span class="command"># Éditer la configuration du site</span>
+sudo nano /etc/nginx/sites-available/default</pre>
+
+<div class="warning-box">
+<strong>Ajouter dans le bloc server :</strong>
+<pre>location ~ \.php$ {
+    include snippets/fastcgi-php.conf;
+    fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
+}</pre>
+</div>
+
+<pre><span class="command"># Redémarrer les services</span>
+sudo systemctl restart nginx
+sudo systemctl restart php8.2-fpm</pre>
+
+<h3 id="etape3-3">3.3 Configuration PHP pour développement</h3>
+<pre><span class="command"># Éditer php.ini</span>
+sudo nano /etc/php/8.2/fpm/php.ini</pre>
+
+<div class="warning-box">
+<strong>Modifier dans php.ini :</strong>
+<pre>display_errors = On
+error_reporting = E_ALL</pre>
+</div>
+
+<pre><span class="command"># Redémarrer PHP-FPM</span>
+sudo systemctl restart php8.2-fpm</pre>
+
+<h3 id="etape3-4">3.4 Tests PHP</h3>
+<pre><span class="command"># Copier les fichiers de test</span>
+sudo cp info.php /var/www/html/
+sudo cp error.php /var/www/html/
+
+<span class="command"># Créer un test simple</span>
+echo "&lt;?php phpinfo(); ?&gt;" | sudo tee /var/www/html/info.php</pre>
+
+<h2 id="etape4-">Étape 4 : Installation des Bases de Données</h2>
+
+<h3 id="etape4-1">4.1 Installation MySQL</h3>
+<pre><span class="command"># Installer MySQL</span>
+sudo apt install mysql-server -y
+
+<span class="command"># Sécuriser l'installation</span>
+sudo mysql_secure_installation
+
+<span class="command"># Configurer l'utilisateur developer</span>
+sudo mysql -u root -p</pre>
+
+<div class="warning-box">
+<strong>Commandes MySQL :</strong>
+<pre>CREATE USER 'developer'@'localhost' IDENTIFIED BY '123456';
+GRANT ALL PRIVILEGES ON *.* TO 'developer'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;</pre>
+</div>
+
+<h3 id="etape4-2">4.2 Installation PostgreSQL</h3>
+<pre><span class="command"># Installer PostgreSQL</span>
+sudo apt install postgresql postgresql-contrib -y
+
+<span class="command"># Configurer l'utilisateur developer</span>
+sudo -u postgres psql</pre>
+
+<div class="warning-box">
+<strong>Commandes PostgreSQL :</strong>
+<pre>CREATE USER developer WITH PASSWORD '123456';
+ALTER USER developer CREATEDB;
+\q</pre>
+</div>
+
+<h3 id="etape4-3">4.3 Installation PhpMyAdmin</h3>
+<pre><span class="command"># Installer PhpMyAdmin</span>
+sudo apt install phpmyadmin -y
+
+<span class="command"># Configurer Nginx pour PhpMyAdmin</span>
+sudo nano /etc/nginx/sites-available/default</pre>
+
+<div class="warning-box">
+<strong>Ajouter la configuration PhpMyAdmin :</strong>
+<pre>location /phpmyadmin {
+    root /usr/share/;
+    index index.php index.html index.htm;
+    location ~ ^/phpmyadmin/(.+\.php)$ {
+        try_files $uri =404;
+        root /usr/share/;
+        fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include /etc/nginx/fastcgi_params;
+    }
+}</pre>
+</div>
+
+<pre><span class="command"># Redémarrer Nginx</span>
+sudo systemctl restart nginx</pre>
+
+<h3 id="etape4-4">4.4 Import de la base de test</h3>
+<pre><span class="command"># Importer dans MySQL</span>
+mysql -u developer -p123456 &lt; TestDB.sql
+
+<span class="command"># Importer dans PostgreSQL</span>
+psql -U developer -d postgres &lt; TestDB.sql</pre>
+
+<div class="page-break"></div>
+
+<h2 id="etape5">Étape 5 : Outils de Développement</h2>
+
+<h3 id="etape5-1">5.1 Installation Visual Studio Code</h3>
+<pre><span class="command"># Ajouter la clé Microsoft</span>
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+
+<span class="command"># Installer la clé</span>
+sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
+
+<span class="command"># Ajouter le repository</span>
+echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list
+
+<span class="command"># Mettre à jour et installer</span>
+sudo apt update
+sudo apt install code -y</pre>
+
+<h3 id="etape5-2">5.2 Installation Git</h3>
+<pre><span class="command"># Installer Git</span>
+sudo apt install git -y
+
+<span class="command"># Configuration Git (optionnel)</span>
+git config --global user.name "Developer"
+git config --global user.email "developer@localhost"</pre>
+
+<h2 id="etape6">Étape 6 : Configuration PDO</h2>
+
+<h3 id="etape6-1">6.1 Vérification et activation PDO</h3>
+<pre><span class="command"># Éditer php.ini</span>
+sudo nano /etc/php/8.2/fmp/php.ini</pre>
+
+<div class="warning-box">
+<strong>Vérifier que ces lignes sont décommentées :</strong>
+<pre>extension=pdo
+extension=pdo_mysql
+extension=pdo_pgsql</pre>
+</div>
+
+<pre><span class="command"># Redémarrer PHP-FPM</span>
+sudo systemctl restart php8.2-fpm</pre>
+
+<h3 id="etape6-2">6.2 Test PDO</h3>
+<pre><span class="command"># Copier le fichier de test PDO</span>
+sudo cp testdb.php /var/www/html/
+
+<span class="command"># Créer un test simple</span>
+sudo nano /var/www/html/testpdo.php</pre>
+
+<div class="warning-box">
+<strong>Contenu du fichier testpdo.php :</strong>
+<pre>&lt;?php
+try {
+    // Test MySQL
+    $pdo = new PDO('mysql:host=localhost;dbname=testdb', 'developer', '123456');
+    echo "Connexion MySQL réussie&lt;br&gt;";
+    
+    // Test PostgreSQL
+    $pdo = new PDO('pgsql:host=localhost;dbname=postgres', 'developer', '123456');
+    echo "Connexion PostgreSQL réussie&lt;br&gt;";
+} catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+}
+?&gt;</pre>
+</div>
+
+<h2 id="etape7">Étape 7 : Configuration HTTPS</h2>
+
+<h3 id="etape7-1">7.1 Génération des certificats SSL</h3>
+<pre><span class="command"># Créer le répertoire SSL</span>
+sudo mkdir /etc/nginx/ssl
+
+<span class="command"># Générer certificat auto-signé</span>
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -keyout /etc/nginx/ssl/nginx.key \
+    -out /etc/nginx/ssl/nginx.crt</pre>
+
+<div class="info-box">
+<strong>Réponses aux questions OpenSSL :</strong><br>
+• Country Name: <code>FR</code><br>
+• State: <code>Hauts-de-France</code><br>
+• City: <code>Calais</code><br>
+• Organization Name: <code>SAE</code><br>
+• Organizational Unit: <code>IT</code><br>
+• Common Name: <code>www.nom1-nom2.net</code><br>
+• Email: <code>developer@localhost</code>
+</div>
+
+<h3 id="etape7-2">7.2 Configuration SSL dans Nginx</h3>
+<pre><span class="command"># Sauvegarder la configuration actuelle</span>
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
+
+<span class="command"># Éditer la configuration</span>
+sudo nano /etc/nginx/sites-available/default</pre>
+
+<div class="warning-box">
+<strong>Configuration complète Nginx HTTPS :</strong>
+<pre># Redirection HTTP vers HTTPS
+server {
+    listen 80;
+    server_name www.nom1-nom2.net;
+    return 301 https://$server_name$request_uri;
+}
+
+# Configuration HTTPS
+server {
+    listen 443 ssl;
+    server_name www.nom1-nom2.net;
+    
+    ssl_certificate /etc/nginx/ssl/nginx.crt;
+    ssl_certificate_key /etc/nginx/ssl/nginx.key;
+    
+    root /var/www/html;
+    index index.php index.html index.htm;
+    charset utf-8;
+    
+    location / {
+        try_files $uri $uri/ =404;
+    }
+    
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
+    }
+    
+    location /phpmyadmin {
+        root /usr/share/;
+        index index.php index.html index.htm;
+        location ~ ^/phpmyadmin/(.+\.php)$ {
+            try_files $uri =404;
+            root /usr/share/;
+            fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
+            fastcgi_index index.php;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            include /etc/nginx/fastcgi_params;
+        }
+    }
+}</pre>
+</div>
+
+<pre><span class="command"># Tester la configuration</span>
+sudo nginx -t
+
+<span class="command"># Redémarrer Nginx</span>
+sudo systemctl restart nginx</pre>
+
+<h2 id="etape8">Étape 8 : Accès Distant</h2>
+
+<h3 id="etape8-1">8.1 Configuration SSH</h3>
+<pre><span class="command"># Vérifier que SSH est installé</span>
+sudo systemctl status ssh
+
+<span class="command"># Si pas installé :</span>
+sudo apt install openssh-server -y
+
+<span class="command"># Démarrer et activer SSH</span>
+sudo systemctl start ssh
+sudo systemctl enable ssh
+
+<span class="command"># Configuration SSH (optionnel)</span>
+sudo nano /etc/ssh/sshd_config</pre>
+
+<div class="warning-box">
+<strong>Modifications recommandées dans sshd_config :</strong>
+<pre>Port 22
+PermitRootLogin no
+PasswordAuthentication yes</pre>
+</div>
+
+<pre><span class="command"># Redémarrer SSH</span>
+sudo systemctl restart ssh</pre>
+
+<h3 id="etape8-2">8.2 Test de connexion SSH</h3>
+<pre><span class="command"># Depuis une autre machine Linux/Mac :</span>
+ssh developer@172.16.1.230
+
+<span class="command"># Depuis Windows avec PuTTY :</span>
+# Serveur : 172.16.1.230
+# Port : 22
+# Utilisateur : developer
+# Mot de passe : 123456</pre>
+
+<div class="page-break"></div>
+
+<h2 id="etape9">Étape 9 : Passage en Production</h2>
+
+<h3 id="etape9-1">9.1 Sécurisation PHP</h3>
+<pre><span class="command"># Éditer php.ini pour la production</span>
+sudo nano /etc/php/8.2/fpm/php.ini</pre>
+
+<div class="warning-box">
+<strong>Modifier ces valeurs pour la production :</strong>
+<pre>display_errors = Off
+expose_php = Off
+log_errors = On
+error_log = /var/log/php_errors.log
+allow_url_fopen = Off
+allow_url_include = Off</pre>
+</div>
+
+<pre><span class="command"># Redémarrer PHP-FPM</span>
+sudo systemctl restart php8.2-fpm</pre>
+
+<h3 id="etape9-2">9.2 Sécurisation des bases de données</h3>
+<pre><span class="command"># Configurer MySQL pour accès local uniquement</span>
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</pre>
+
+<div class="warning-box">
+<strong>Modifier dans mysqld.cnf :</strong>
+<pre>bind-address = 127.0.0.1</pre>
+</div>
+
+<pre><span class="command"># Configurer PostgreSQL</span>
+sudo nano /etc/postgresql/*/main/postgresql.conf</pre>
+
+<div class="warning-box">
+<strong>Modifier dans postgresql.conf :</strong>
+<pre>listen_addresses = 'localhost'</pre>
+</div>
+
+<pre><span class="command"># Redémarrer les services</span>
+sudo systemctl restart mysql
+sudo systemctl restart postgresql</pre>
+
+<h3 id="etape9-3">9.3 Configuration du pare-feu</h3>
+<pre><span class="command"># Installer UFW</span>
+sudo apt install ufw -y
+
+<span class="command"># Configurer les règles</span>
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw allow 'Nginx Full'
+
+<span class="command"># Activer le pare-feu</span>
+sudo ufw enable
+
+<span class="command"># Vérifier le statut</span>
+sudo ufw status</pre>
+
+<h2 id="diagnostic">Commandes de Diagnostic et Maintenance</h2>
+
+<h3 id="verifications">Vérifications système</h3>
+<pre><span class="command"># Vérifier les services</span>
+sudo systemctl status nginx php8.2-fpm mysql postgresql ssh
+
+<span class="command"># Vérifier les ports ouverts</span>
+sudo netstat -tlnp
+sudo ss -tlnp
+
+<span class="command"># Vérifier l'espace disque</span>
+df -h
+
+<span class="command"># Vérifier la mémoire</span>
+free -h</pre>
+
+<h3 id="logs">Consultation des logs</h3>
+<pre><span class="command"># Logs Nginx</span>
+sudo tail -f /var/log/nginx/access.log
+sudo tail -f /var/log/nginx/error.log
+
+<span class="command"># Logs système</span>
+sudo tail -f /var/log/auth.log
+sudo journalctl -f</pre>
+
+<h3 id="tests">Tests de connectivité</h3>
+<pre><span class="command"># Tests HTTP/HTTPS</span>
+curl -I http://172.16.1.230
+curl -I https://172.16.1.230 -k
+
+<span class="command"># Test PHP</span>
+curl http://172.16.1.230/info.php
+curl https://172.16.1.230/info.php -k
+
+<span class="command"># Test bases de données</span>
+mysql -u developer -p123456 -e "SHOW DATABASES;"
+psql -U developer -d postgres -c "\l"</pre>
+
+<h3 id="sauvegarde">Sauvegarde</h3>
+<pre><span class="command"># Sauvegarde de la configuration</span>
+sudo tar -czf /home/developer/backup-config.tar.gz \
+    /etc/nginx/sites-available/default \
+    /etc/php/8.2/fpm/php.ini \
+    /var/www/html/
+
+<span class="command"># Sauvegarde MySQL</span>
+mysqldump -u developer -p123456 --all-databases > /home/developer/mysql-backup.sql
+
+<span class="command"># Sauvegarde PostgreSQL</span>
+pg_dumpall -U developer > /home/developer/postgresql-backup.sql</pre>
+
+<h2 id="config-finale">Informations de Configuration Finale</h2>
+
+<table>
+    <tr>
+        <th>Paramètre</th>
+        <th>Valeur</th>
+    </tr>
+    <tr>
+        <td>IP Serveur</td>
+        <td>172.16.1.230/24</td>
+    </tr>
+    <tr>
+        <td>Nom de machine</td>
+        <td>www.justin-bonnier-sow-ciuffa.net</td>
+    </tr>
+    <tr>
+        <td>Utilisateur</td>
+        <td>developer</td>
+    </tr>
+    <tr>
+        <td>Mot de passe Debian</td>
+        <td>123456</td>
+    </tr>
+    <tr>
+        <td>Mot de passe Windows</td>
+        <td>sae123</td>
+    </tr>
+    <tr>
+        <td>HTTP</td>
+        <td>Port 80 (redirection HTTPS)</td>
+    </tr>
+    <tr>
+        <td>HTTPS</td>
+        <td>Port 443</td>
+    </tr>
+    <tr>
+        <td>SSH</td>
+        <td>Port 22</td>
+    </tr>
+    <tr>
+        <td>Identifiant MYSQL / PGSQL</td>
+        <td>developer</td>
+    </tr>
+    <tr>
+        <td>Mot de passe MYSQL / PGSQL</td>
+        <td>123456789</td>
+    </tr>
+</table>
+</body>
+<script>
+        // Récupération du bouton
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        // Fonction pour afficher/masquer le bouton selon la position de scroll
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        // Fonction pour remonter en haut avec animation fluide
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>

@@ -1,0 +1,183 @@
+    @media print {
+        body { margin: 0; }
+        .page-break { page-break-before: always; }
+    }
+    
+    body {
+        font-family: 'Courier New', monospace;
+        line-height: 1.4;
+        margin: 20px;
+        color: #333;
+        background: white;
+    }
+    
+    h1{
+        color: #2c3e50;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 10px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    h2 {
+        color: #34495e;
+        background: #ecf0f1;
+        padding: 10px;
+        border-left: 5px solid #3498db;
+        margin-top: 25px;
+    }
+    
+    h3 {
+        color: #2980b9;
+        margin-top: 20px;
+        border-bottom: 1px solid #bdc3c7;
+        padding-bottom: 5px;
+    }
+    
+    pre {
+        background: #2c3e50;
+        color: #ecf0f1;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        margin: 10px 0;
+        border-left: 4px solid #e74c3c;
+    }
+    
+    code {
+        background: #f8f9fa;
+        padding: 2px 5px;
+        border-radius: 3px;
+        color: #e74c3c;
+        font-weight: bold;
+    }
+    
+    .info-box {
+        background: #d5f4e6;
+        border: 1px solid #27ae60;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 15px 0;
+    }
+    
+    .warning-box {
+        background: #fdeaa7;
+        border: 1px solid #f39c12;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 15px 0;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+    }
+    
+    th, td {
+        border: 1px solid #bdc3c7;
+        padding: 8px;
+        text-align: left;
+    }
+    
+    th {
+        background: #34495e;
+        color: white;
+    }
+    
+    .command {
+        font-weight: bold;
+        color: #27ae60;
+    }
+
+    .sommaire {
+        list-style-type: none;
+        font-size: 120%;
+        color: #2c3e50;
+        border: 2px solid #3498db;
+        padding: 20px;
+        margin-bottom: 30px;
+        background: #f8f9fa;
+    }
+
+    .sommaire li {
+        margin-bottom: 8px;
+        padding-left: 20px;
+    }
+
+    .sommaire a {
+        text-decoration: none;
+        font-weight: bold;
+        color: #2c3e50;
+        display: block;
+        padding: 5px 0;
+    }
+
+    .sommaire a:hover {
+        text-decoration: underline;
+        color: #3498db;
+    }
+
+    .etape-principale {
+        font-size: 110%;
+        color: #e74c3c;
+        margin-top: 15px;
+    }
+
+    .sous-etape {
+        font-size: 100%;
+        color: #34495e;
+        padding-left: 20px;
+    }
+
+    .sous-sous-etape {
+        font-size: 95%;
+        color: #7f8c8d;
+        padding-left: 40px;
+    }
+    
+    .TBDM h1 {
+        color: #2c3e50;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 10px;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 150%;
+    }
+
+    /* Style du bouton */
+    #scrollToTop {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 18px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 1000;
+    }
+
+    /* Bouton visible quand on scroll */
+    #scrollToTop.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Effet hover */
+    #scrollToTop:hover {
+        background-color: #0056b3;
+        transform: scale(1.1);
+    }
+
+    /* Animation de rotation */
+    #scrollToTop:active {
+        transform: scale(0.95);
+    }
